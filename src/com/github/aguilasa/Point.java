@@ -29,4 +29,14 @@ public class Point {
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Point [x=");
+		builder.append(x);
+		builder.append(", y=");
+		builder.append(y);
+		builder.append("]");
+		return builder.toString();
+	}
 }
