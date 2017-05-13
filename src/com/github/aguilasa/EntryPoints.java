@@ -29,22 +29,23 @@ public class EntryPoints {
 	}
 
 	public List<Point> getPoints() {
-		if (!processed) {
-			process();
-		}
+		checkProcessed();
 
 		return points;
 	}
 
 	public List<Edge> getEdges() {
-		if (!processed) {
-			process();
-		}
+		checkProcessed();
 
 		return edges;
 	}
 
-	// (42, 3) (41, 1)
+	private void checkProcessed() {
+		if (!processed) {
+			process();
+		}
+	}
+
 	private void process() {
 		points.clear();
 		edges.clear();
@@ -57,25 +58,46 @@ public class EntryPoints {
 
 				p1 = addPoint(p1);
 				p2 = addPoint(p2);
-				
+
 				edges.add(new Edge(p1, p2));
 			}
 		}
+		processed = true;
 	}
 
 	private Point addPoint(Point point) {
 		if (!points.isEmpty()) {
-			int indexOf = points.indexOf(point);
-			if (indexOf >= 0) {
-				point = points.get(indexOf);
+			int index = points.indexOf(point);
+			if (index >= 0) {
+				point = points.get(index);
+				point.setIndex(index);
 			} else {
 				points.add(point);
+				point.setIndex(points.indexOf(point));
 			}
 		} else {
 			points.add(point);
 		}
 		point.incDegree();
 		return point;
+	}
+
+	public void replacePoints(Point from, Point to) {
+		checkProcessed();
+
+		for (Edge edge : edges) {
+			if (edge.getP1() == from) {
+				edge.setP1(to);
+			}
+
+			if (edge.getP2() == from) {
+				edge.setP2(to);
+			}
+		}
+
+		to.setDegree(to.getDegree() + from.getDegree());
+		to.setIndex(Math.min(to.getIndex(), to.getIndex()));
+		points.remove(from);
 	}
 
 }

@@ -60,7 +60,10 @@ public class Point {
 		builder.append(y);
 		builder.append(", degree=");
 		builder.append(degree);
+		builder.append(", index=");
+		builder.append(index);
 		builder.append("]");
+		builder.append("\r\n");
 		return builder.toString();
 	}
 
