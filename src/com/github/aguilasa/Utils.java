@@ -90,6 +90,11 @@ public class Utils {
 
 			@Override
 			public int compare(Point p1, Point p2) {
+				if (!p1.getAdjacent().isEmpty() && !p2.getAdjacent().isEmpty()) {
+					Point first = p1.getAdjacent().get(0);
+					Point next = p2.getAdjacent().get(0);
+					return next.getAdjacent().size() - first.getAdjacent().size();
+				}
 				return p1.getIndex() - p2.getIndex();
 			}
 		});
@@ -123,5 +128,6 @@ public class Utils {
 			oneDegreePoints = oneDegreePoints(entry.getPoints());
 		}
 
+		entry.setPointNames();
 	}
 }

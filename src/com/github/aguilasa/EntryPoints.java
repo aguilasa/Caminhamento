@@ -59,6 +59,9 @@ public class EntryPoints {
 				p1 = addPoint(p1);
 				p2 = addPoint(p2);
 
+				p1.addAdjacent(p2);
+				p2.addAdjacent(p1);
+
 				edges.add(new Edge(p1, p2));
 			}
 		}
@@ -95,9 +98,20 @@ public class EntryPoints {
 			}
 		}
 
+		Point first = from.getAdjacent().getFirst();
+		first.getAdjacent().remove(from);
+		first.getAdjacent().add(to);
+
 		to.setDegree(to.getDegree() + from.getDegree());
 		to.setIndex(Math.min(to.getIndex(), to.getIndex()));
 		points.remove(from);
 	}
 
+	public void setPointNames() {
+		int i = 1;
+		for (Point p : points) {
+			p.setName(String.format("V%d", i));
+			i++;
+		}
+	}
 }

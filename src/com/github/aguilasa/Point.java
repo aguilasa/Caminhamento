@@ -1,10 +1,14 @@
 package com.github.aguilasa;
 
+import java.util.LinkedList;
+
 public class Point {
+	private String name = "";
 	private int x;
 	private int y;
 	private int degree = 0;
 	private int index = 0;
+	private LinkedList<Point> adjacent = new LinkedList<>();
 
 	public Point() {
 		x = y = 0;
@@ -13,6 +17,14 @@ public class Point {
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getX() {
@@ -51,20 +63,17 @@ public class Point {
 		this.index = index;
 	}
 
+	public LinkedList<Point> getAdjacent() {
+		return adjacent;
+	}
+
+	public void addAdjacent(Point p) {
+		adjacent.add(p);
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Point [x=");
-		builder.append(x);
-		builder.append(", y=");
-		builder.append(y);
-		builder.append(", degree=");
-		builder.append(degree);
-		builder.append(", index=");
-		builder.append(index);
-		builder.append("]");
-		builder.append("\r\n");
-		return builder.toString();
+		return String.format("%s(%d,%d)", name, x, y);
 	}
 
 	@Override
