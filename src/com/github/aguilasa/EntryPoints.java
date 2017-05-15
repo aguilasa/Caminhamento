@@ -107,11 +107,10 @@ public class EntryPoints {
 		points.remove(from);
 	}
 
-	public void setPointNames() {
-		int i = 1;
+	public void resetPointIndex() {
+		int i = 0;
 		for (Point p : points) {
-			p.setName(String.format("V%d", i));
-			i++;
+			p.setIndex(i++);
 		}
 	}
 }

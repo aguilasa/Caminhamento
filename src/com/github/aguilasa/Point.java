@@ -61,6 +61,7 @@ public class Point {
 
 	public void setIndex(int index) {
 		this.index = index;
+		setName(String.format("V%d", index + 1));
 	}
 
 	public LinkedList<Point> getAdjacent() {
@@ -73,7 +74,7 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%d,%d)", name, x, y);
+		return name;
 	}
 
 	@Override
