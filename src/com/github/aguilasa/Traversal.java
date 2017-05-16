@@ -1,3 +1,6 @@
+/** @author Ingmar.Aguiar 
+ * 
+ */
 package com.github.aguilasa;
 
 public class Traversal {
