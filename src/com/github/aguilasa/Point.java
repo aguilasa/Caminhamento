@@ -77,6 +77,9 @@ public class Point {
 
 	@Override
 	public String toString() {
+		if (name.isEmpty()) {
+			return String.format("(%d, %d)", x, y);
+		}
 		return name;
 	}
 

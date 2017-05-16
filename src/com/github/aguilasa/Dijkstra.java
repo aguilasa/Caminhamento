@@ -62,6 +62,21 @@ public class Dijkstra {
 			}
 		}
 		System.out.println("acabou");
+		outPrint(entry.getPoints().get(15));
+	}
+
+	public void outPrint(Point destiny) {
+		if (!predecessor.isEmpty()) {
+			LinkedList<Point> points = new LinkedList<>();
+			points.add(destiny);
+
+			Point pred = predecessor.get(destiny.getIndex());
+			while (pred != null) {
+				points.add(pred);
+				pred = predecessor.get(pred.getIndex());
+			}
+			System.out.println(points);
+		}
 	}
 
 }

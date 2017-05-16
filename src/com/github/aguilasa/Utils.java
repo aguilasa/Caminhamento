@@ -115,4 +115,35 @@ public class Utils {
 		return numbers;
 	}
 
+	public static List<Point> getPointBounds(List<Point> points) {
+		List<Point> bounds = new ArrayList<>();
+		int minX = Integer.MAX_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int maxY = Integer.MIN_VALUE;
+
+		for (Point p : points) {
+			if (p.getX() < minX) {
+				minX = p.getX();
+			}
+
+			if (p.getY() < minY) {
+				minY = p.getY();
+			}
+
+			if (p.getX() > maxX) {
+				maxX = p.getX();
+			}
+
+			if (p.getY() > minY) {
+				maxY = p.getY();
+			}
+		}
+
+		bounds.add(new Point(minX, minY));
+		bounds.add(new Point(maxX, maxY));
+
+		return bounds;
+	}
+
 }
