@@ -1,6 +1,6 @@
 package com.github.aguilasa;
 
-public class Caminhamento {
+public class Traversal {
 
 	public static void main(String[] args) {
 		StringBuilder entryData = Utils.loadFile("resources/in.txt");
