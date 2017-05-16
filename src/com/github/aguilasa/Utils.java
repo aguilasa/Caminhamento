@@ -112,21 +112,4 @@ public class Utils {
 		return numbers;
 	}
 
-	public static void adjustPoints(EntryPoints entry) {
-		List<Point> oneDegreePoints = oneDegreePoints(entry.getPoints());
-		while (!oneDegreePoints.isEmpty()) {
-			Point first = oneDegreePoints.remove(0);
-			Point next = closestPoint(first, entry.getPoints());
-
-			if (next.getDegree() == 1) {
-				entry.replacePoints(next, first);
-			} else {
-				entry.replacePoints(first, next);
-			}
-
-			oneDegreePoints = oneDegreePoints(entry.getPoints());
-		}
-
-		entry.resetPointIndex();
-	}
 }

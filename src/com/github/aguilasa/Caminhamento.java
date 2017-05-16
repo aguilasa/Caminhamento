@@ -6,7 +6,6 @@ public class Caminhamento {
 		StringBuilder entryData = Utils.loadFile("resources/in.txt");
 		EntryPoints entryPoint = new EntryPoints();
 		entryPoint.setEntryData(entryData.toString());
-		Utils.adjustPoints(entryPoint);
 		
 		Dijkstra dijkstra = new Dijkstra(entryPoint);
 		dijkstra.doDijkstra();
