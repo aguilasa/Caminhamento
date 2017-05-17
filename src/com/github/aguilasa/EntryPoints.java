@@ -132,10 +132,27 @@ public class EntryPoints {
 	}
 
 	private void resetPointIndex() {
+		List<Point> tmp = new ArrayList<>(points);
+		
 		int i = 0;
-		for (Point p : points) {
-			p.setIndex(i++);
+		
+		for (Edge e : edges) {
+			Point p = e.getP1();
+			if (tmp.contains(p)) {
+				tmp.remove(p);
+				p.setIndex(i++);
+			}
+			
+			p = e.getP2();
+			if (tmp.contains(p)) {
+				tmp.remove(p);
+				p.setIndex(i++);
+			}
 		}
+		
+//		for (Point p : points) {
+//			p.setIndex(i++);
+//		}
 	}
 
 	private void processAdjacencies() {

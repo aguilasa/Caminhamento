@@ -25,7 +25,7 @@ public class Traversal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					View frame = new View(point.getX(), point.getY(), points);
+					View frame = new View(point.getX(), point.getY(), entryPoint);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

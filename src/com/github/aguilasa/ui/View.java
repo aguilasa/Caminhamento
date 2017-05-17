@@ -5,18 +5,17 @@ import static com.github.aguilasa.ui.Consts.TOP_BORDER;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import com.github.aguilasa.Point;
+import com.github.aguilasa.EntryPoints;
 
 public class View extends JFrame {
 
 	private JPanel contentPane;
-	private ViewPanel panel = new ViewPanel();
+	private ViewPanel panel;
 
 	/**
 	 * Launch the application.
@@ -37,11 +36,11 @@ public class View extends JFrame {
 	/**
 	 * Create the frame.
 	 * 
-	 * @param points
+	 * @param entryPoints
 	 */
-	public View(int w, int h, List<Point> points) {
-		int width = w * MULTIPLIER + MULTIPLIER * 3 - TOP_BORDER;
-		int height = h * MULTIPLIER + MULTIPLIER * 3 - TOP_BORDER;
+	public View(int w, int h, EntryPoints entryPoints) {
+		int width = w * MULTIPLIER + MULTIPLIER * 3 + TOP_BORDER;
+		int height = h * MULTIPLIER + MULTIPLIER * 3 + TOP_BORDER;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width + TOP_BORDER * 4, height + TOP_BORDER * 6);
 		// setBounds(100, 100, 300, 300);
@@ -49,6 +48,7 @@ public class View extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		panel = new ViewPanel(entryPoints, width, height);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(TOP_BORDER, TOP_BORDER, width, height);
 		contentPane.add(panel);
