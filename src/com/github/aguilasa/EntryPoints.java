@@ -4,12 +4,14 @@
 package com.github.aguilasa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EntryPoints {
-	private String fileName = "";
 	private String entryData = "";
 	private boolean processed = false;
+	private String origin = "";
+	private String destiny = "";
 	private List<Point> points = new ArrayList<>();
 	private List<Edge> edges = new ArrayList<>();
 
@@ -24,12 +26,37 @@ public class EntryPoints {
 		}
 	}
 
-	public String getFileName() {
-		return fileName;
+	public String getOrigin() {
+		return origin;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public Point getOriginPoint() {
+		return getPointByName(origin);
+	}
+
+	private Point getPointByName(String name) {
+		for (Point p : getPoints()) {
+			if (p.getName().equalsIgnoreCase(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestiny() {
+		return destiny;
+	}
+
+	public Point getDestinyPoint() {
+		return getPointByName(destiny);
+	}
+
+	public void setDestiny(String destiny) {
+		this.destiny = destiny;
 	}
 
 	public String getEntryData() {
@@ -67,9 +94,10 @@ public class EntryPoints {
 	}
 
 	private void processPoints() {
-		points.clear();
-		edges.clear();
-		String[] lines = entryData.split("\r?\n");
+		clearFields();
+		List<String> lines = new ArrayList<>(Arrays.asList(entryData.split("\r?\n")));
+		processOriginDestiny(lines);
+
 		for (String line : lines) {
 			List<Integer> numbers = Utils.getNumbers(line);
 			if (numbers.size() == 4) {
@@ -82,6 +110,19 @@ public class EntryPoints {
 				edges.add(new Edge(p1, p2));
 			}
 		}
+	}
+
+	private void processOriginDestiny(List<String> lines) {
+		String[] originDestiny = lines.remove(0).split("\\s");
+		origin = originDestiny[0].trim();
+		destiny = originDestiny[1].trim();
+	}
+
+	private void clearFields() {
+		origin = "";
+		destiny = "";
+		points.clear();
+		edges.clear();
 	}
 
 	private void adjustPoints() {
