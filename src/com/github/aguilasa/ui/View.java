@@ -1,3 +1,6 @@
+/** @author Ingmar.Aguiar 
+ * 
+ */
 package com.github.aguilasa.ui;
 
 import static com.github.aguilasa.ui.Consts.MULTIPLIER;

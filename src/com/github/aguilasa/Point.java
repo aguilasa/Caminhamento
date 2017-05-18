@@ -57,6 +57,10 @@ public class Point {
 	public void incDegree() {
 		degree++;
 	}
+	
+	public void decDegree() {
+		degree--;
+	}
 
 	public int getIndex() {
 		return index;

@@ -21,17 +21,20 @@ public class Traversal {
 
 		Dijkstra dijkstra = new Dijkstra(entryPoint);
 		dijkstra.doDijkstra();
+		dijkstra.printDijkstra();
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					View frame = new View(point.getX(), point.getY(), entryPoint);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+		if (args.length == 1) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						View frame = new View(point.getX(), point.getY(), entryPoint);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 }

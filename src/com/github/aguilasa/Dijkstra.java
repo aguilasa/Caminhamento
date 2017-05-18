@@ -61,8 +61,12 @@ public class Dijkstra {
 				relax(u, v);
 			}
 		}
-		System.out.println("acabou");
-		outPrint(entry.getPoints().get(15));
+	}
+	
+	public void printDijkstra() {
+		for (Point p : entry.getPoints()) {
+			outPrint(p);
+		}
 	}
 
 	public void outPrint(Point destiny) {
@@ -72,10 +76,35 @@ public class Dijkstra {
 
 			Point pred = predecessor.get(destiny.getIndex());
 			while (pred != null) {
-				points.add(pred);
+				points.addFirst(pred);
 				pred = predecessor.get(pred.getIndex());
 			}
-			System.out.println(points);
+
+			StringBuilder out = new StringBuilder();
+			out.append("Origem: ").append(points.getFirst()).append("\r\n");
+			out.append("Destino: ").append(points.getLast()).append("\r\n").append("\r\n");
+			out.append("X\tY\tVértice\t\tDistância\r\n");
+			Point previous = null;
+			Double total = 0.0;
+			for (Point p : points) {
+				out.append(p.getX()).append("\t");
+				out.append(p.getY()).append("\t");
+				out.append(p).append("\t\t");
+				if (previous != null) {
+					double pointDist = Utils.pointDist(previous, p);
+					total += pointDist;
+					out.append(pointDist);
+				}
+				out.append("\r\n");
+
+				previous = p;
+			}
+
+			out.append("\r\nTotal\t").append(total);
+			out.append("\r\n---------------------------------------------------------");
+			out.append("\r\n\r\n");
+
+			System.out.println(out);
 		}
 	}
 

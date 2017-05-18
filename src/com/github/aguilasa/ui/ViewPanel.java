@@ -1,3 +1,6 @@
+/** @author Ingmar.Aguiar 
+ * 
+ */
 package com.github.aguilasa.ui;
 
 import static com.github.aguilasa.ui.Consts.CIRCLE_DIAMETER;
@@ -56,7 +59,8 @@ public class ViewPanel extends JPanel {
 		Point center = getCenter(p);
 		int w = g2.getFontMetrics().stringWidth(p.getName());
 		int h = g2.getFontMetrics().getHeight();
-		g2.drawString(p.getName(), center.getX(), center.getY());
+//		g2.drawString(p.getName(), center.getX() + w / 2, center.getY());
+		g2.drawString(p.getName(), adjustX(p)+w/2 ,adjustY(p));
 	}
 
 	private void drawPoint(Point p, Graphics2D g2) {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPoints {
+	private String fileName = "";
 	private String entryData = "";
 	private boolean processed = false;
 	private List<Point> points = new ArrayList<>();
@@ -21,6 +22,14 @@ public class EntryPoints {
 			this.entryData = entryData;
 			processed = false;
 		}
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getEntryData() {
@@ -70,9 +79,6 @@ public class EntryPoints {
 				p1 = addPoint(p1);
 				p2 = addPoint(p2);
 
-				// p1.addAdjacent(p2);
-				// p2.addAdjacent(p1);
-
 				edges.add(new Edge(p1, p2));
 			}
 		}
@@ -84,10 +90,14 @@ public class EntryPoints {
 			Point first = oneDegreePoints.remove(0);
 			Point next = Utils.closestPoint(first, points);
 
-			if (next.getDegree() == 1) {
-				replacePoints(next, first);
+			if (Utils.pointDist(first, next) <= 1) {
+				if (next.getDegree() == 1) {
+					replacePoints(next, first);
+				} else {
+					replacePoints(first, next);
+				}
 			} else {
-				replacePoints(first, next);
+				removePoint(first);
 			}
 
 			oneDegreePoints = Utils.oneDegreePoints(points);
@@ -122,37 +132,52 @@ public class EntryPoints {
 			}
 		}
 
-//		Point first = from.getAdjacent().getFirst();
-//		first.getAdjacent().remove(from);
-//		first.getAdjacent().add(to);
-
 		to.setDegree(to.getDegree() + from.getDegree());
 		to.setIndex(Math.min(to.getIndex(), to.getIndex()));
 		points.remove(from);
 	}
 
+	private void removePoint(Point p) {
+		List<Edge> remove = new ArrayList<>();
+
+		for (Edge edge : edges) {
+			if (edge.getP1() == p) {
+				remove.add(edge);
+				edge.getP2().decDegree();
+				continue;
+			}
+
+			if (edge.getP2() == p) {
+				remove.add(edge);
+				edge.getP1().decDegree();
+			}
+		}
+
+		for (Edge e : remove) {
+			edges.remove(e);
+		}
+
+		points.remove(p);
+	}
+
 	private void resetPointIndex() {
 		List<Point> tmp = new ArrayList<>(points);
-		
+
 		int i = 0;
-		
+
 		for (Edge e : edges) {
 			Point p = e.getP1();
 			if (tmp.contains(p)) {
 				tmp.remove(p);
 				p.setIndex(i++);
 			}
-			
+
 			p = e.getP2();
 			if (tmp.contains(p)) {
 				tmp.remove(p);
 				p.setIndex(i++);
 			}
 		}
-		
-//		for (Point p : points) {
-//			p.setIndex(i++);
-//		}
 	}
 
 	private void processAdjacencies() {
