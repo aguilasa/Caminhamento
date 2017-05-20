@@ -25,7 +25,8 @@ public class Dijkstra {
 			predecessor.add(null);
 			priority.add(point);
 		}
-		cost.set(0, 0.0);
+		Point origin = entry.getOriginPoint();
+		cost.set(origin.getIndex(), 0.0);
 	}
 
 	private Point extractMin() {
@@ -62,11 +63,11 @@ public class Dijkstra {
 			}
 		}
 	}
-	
+
 	public void printDijkstra() {
-		for (Point p : entry.getPoints()) {
-			outPrint(p);
-		}
+		Point destiny = entry.getDestinyPoint();
+
+		outPrint(destiny);
 	}
 
 	public void outPrint(Point destiny) {
